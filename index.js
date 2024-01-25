@@ -1,7 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
+import dotenv from "dotenv";import { dirname } from "path";
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -26,7 +28,7 @@ const Registration = mongoose.model("Registration", registrationSchema);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.get("/", (req, res) => {
-    res.sendFile("C:/Users/ADMIN/OneDrive/Desktop/WEB DEVELOPMENT/Registration Form/pages/form.html");
+    res.sendFile(__dirname + "/pages/form.html");
   });
 
 app.post("/register",async(req,res)=>
@@ -61,12 +63,12 @@ app.post("/register",async(req,res)=>
 
 app.get("/success",(req,res)=>
 {
-    res.sendFile("C:/Users/ADMIN/OneDrive/Desktop/WEB DEVELOPMENT/Registration Form/pages/success.html");
+    res.sendFile(__dirname + "/pages/success.html");
 });
 
 app.get("/error",(req,res)=>
 {
-    res.sendFile("C:/Users/ADMIN/OneDrive/Desktop/WEB DEVELOPMENT/Registration Form/pages/error.html");
+    res.sendFile(__dirname + "/pages/error.html");
 });
 
 app.listen(port, ()=>
